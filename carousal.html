@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #card {
+        width: 300px;
+        padding: 20px;
+        border: 1px solid black;
+
+        transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    #card:hover {
+        transform: scale(1.05);
+    }
+</style>
+<body>
+    <div id="container">
+        <div id="card">
+            <h1 id="card-title">card 1</h1>
+            <p id="card-text">This is card 1</p>
+
+            <button id="prev" aria-label="previous Card">Previous</button>
+            <button id="next" aria-label="Next Card">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const card = [
+            {
+                title: " card 1",
+                text: "this is card 1",
+                color: "red"
+            },
+            {
+                title: " card 2",
+                text: "this is card 2",
+                color:"blue"
+            },
+            {
+                title: " card 3",
+                text: "this is card 3",
+                color: "black"
+            }
+        ]
+
+        let index = 0;
+        const title = document.getElementById("card-title");
+        const text = document.getElementById("card-text");
+
+        function showCard(){
+            title.innerText = card[index].title;
+            text.innerText = card[index].text;
+            document.getElementById("card").style.backgroundColor = card[index].color;
+        }
+
+        document.getElementById("prev").addEventListener("click", function(){
+            index--;
+
+            if(index < 0){
+                index = card.length-1;
+            }
+
+            showCard();
+        })
+
+        document.getElementById("next").addEventListener("click", function(){
+            index++;
+            if(index >= card.length){
+                index = 0;
+            }
+            showCard();
+        })
+    </script>
+</body>
+</html>
